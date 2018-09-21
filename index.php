@@ -1,4 +1,18 @@
-<!DOCTYPE html>
+<?php 
+// mengambil file konfigurasi dan kelas-kelas didalamnya
+include_once 'config/config.php'; 
+
+// mengambil siapa yang login ke sistem
+$login_akses = isset($_SESSION['akses']) ? $_SESSION['akses'] : FALSE;
+$login_akses = 'dosen'; // hanya untuk developer (ganti mahasiswa untuk login sebagai mahasiswa)
+
+// jika belum login, arahkan ke halaman login
+if ( ! $login_akses) {
+	header('Location: login.php');
+	exit(); // stop script dibawahnya
+}
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -11,10 +25,10 @@
 	<div class="container mt-4">
 		<ul class="nav justify-content-center nav-pills nav-fill bg-dark">
 			<li class="nav-item">
-				<a class="nav-link rounded-0 bg-info text-light active" href="#"><i class="fas fa-columns"></i> Beranda</a>
+				<a class="nav-link rounded-0 bg-info text-light active" href="index.php?h=beranda"><i class="fas fa-columns"></i> Beranda</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link rounded-0 bg-dark text-light" href="#"><i class="fas fa-book"></i> Matakuliah</a>
+				<a class="nav-link rounded-0 bg-dark text-light" href="index.php?h=matakuliah"><i class="fas fa-book"></i> Matakuliah</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link rounded-0 bg-dark text-light" href="#"><i class="fas fa-clipboard-list"></i> Nilai</a>
@@ -29,21 +43,25 @@
 
 		<!-- konten -->
 		<div class="row mt-3">
-			<!-- sidebar -->
-			<div class="col-md-3">
-				<div class="card">
-					<img src="img/bi.jpg" alt="Foto" class="card-img-top">
-					<div class="card-body">
-						<h5 class="card-title">Yoga Dwi J</h5>
-						<p class="card-text">Teknik Informatika</p>
-					</div>
-				</div>
-			</div>
+			<?php
+				// mengambil halaman dari url : index.php?h=nama-halaman
+				$halaman = isset($_GET['h']) ? $_GET['h'] : '';
 
-			<!-- konten utama -->
-			<div class="col-md-9">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate nisi voluptas maxime ratione, nobis nulla! Architecto unde officiis, voluptate amet. Repellendus eaque impedit reprehenderit culpa animi consectetur distinctio voluptate inventore!
-			</div>
+				switch ($halaman) {
+
+					case 'beranda':
+						include $login_akses . '/beranda.php';
+					break;
+					case 'tambah-tugas':
+						include $login_akses . '/tambah-tugas.php';
+					break;
+
+					// default jika halaman tidak ditemukan
+					default:
+						include $login_akses . '/beranda.php'; // halaman default
+					break;
+				}
+			?>
 
 			<!-- footer -->
 			<div class="col-md-12 mt-3">
