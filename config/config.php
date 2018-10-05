@@ -1,10 +1,12 @@
 <?php 
+// memulai session
+session_start();
 
 class Database {
 	private $host = "localhost";
 	private $user = "root";
-	private $pass = "";
-	private $dbname = "tugakita_db";
+	private $pass = "fay";
+	private $dbname = "tugaskita_db";
 
 	public $con;
 
@@ -17,5 +19,6 @@ class Database {
 }
 
 
+include_once 'mahasiswa.class.php';
 include_once 'dosen.class.php';
 include_once 'tugas.class.php';

@@ -4,7 +4,7 @@ include_once 'config/config.php';
 
 // mengambil siapa yang login ke sistem
 $login_akses = isset($_SESSION['akses']) ? $_SESSION['akses'] : FALSE;
-$login_akses = 'dosen'; // hanya untuk developer (ganti mahasiswa untuk login sebagai mahasiswa)
+// $login_akses = 'dosen'; // hanya untuk developer (ganti mahasiswa untuk login sebagai mahasiswa)
 
 // jika belum login, arahkan ke halaman login
 if ( ! $login_akses) {
@@ -37,7 +37,7 @@ if ( ! $login_akses) {
 				<a class="nav-link rounded-0 bg-dark text-light" href="#"><i class="fas fa-user"></i> Profile</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link rounded-0 bg-dark text-light" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+				<a class="nav-link rounded-0 bg-dark text-light" href="index.php?h=logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
 			</li>
 		</ul>
 
@@ -54,6 +54,13 @@ if ( ! $login_akses) {
 					break;
 					case 'tambah-tugas':
 						include $login_akses . '/tambah-tugas.php';
+					break;
+
+					// logout
+					case 'logout':
+						session_destroy(); // hapus session
+						header('Location: login.php'); // redirect ke login
+						exit(); // stop script dibawahnya
 					break;
 
 					// default jika halaman tidak ditemukan
@@ -73,5 +80,10 @@ if ( ! $login_akses) {
 			</div>
 		</div>
 	</div>
+
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="js/jquery-3.3.1.slim.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
