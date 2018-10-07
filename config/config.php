@@ -21,4 +21,5 @@ class Database {
 
 include_once 'mahasiswa.class.php';
 include_once 'dosen.class.php';
+include_once 'matakuliah.class.php';
 include_once 'tugas.class.php';

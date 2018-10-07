@@ -20,6 +20,7 @@ if ( ! $login_akses) {
 	<title>Beranda</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="fontawesome/css/all.min.css">
+	<script src="js/jquery-3.3.1.slim.min.js"></script>
 </head>
 <body class="bg-secondary">
 	<div class="container mt-4">
@@ -52,8 +53,21 @@ if ( ! $login_akses) {
 					case 'beranda':
 						include $login_akses . '/beranda.php';
 					break;
+
+					// tugas
+					case 'tugas':
+						include $login_akses . '/tugas.php';
+					break;
 					case 'tambah-tugas':
 						include $login_akses . '/tambah-tugas.php';
+					break;
+					case 'ubah-tugas':
+						include $login_akses . '/ubah-tugas.php';
+					break;
+
+					// matakuliah
+					case 'matakuliah':
+						include $login_akses . '/matakuliah.php';
 					break;
 
 					// logout
@@ -81,8 +95,7 @@ if ( ! $login_akses) {
 		</div>
 	</div>
 
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="js/jquery-3.3.1.slim.min.js"></script>
+	<!-- Popper.js, then Bootstrap JS -->
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 </body>

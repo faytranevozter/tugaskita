@@ -4,6 +4,13 @@ $id_ajar = $_GET['aid']; // mengambil dari url (ex: ?mid=23)
 $tugas = new Tugas();
 $data_tugas = $tugas->get_by_ajar_id($id_ajar);
 
+// hapus data
+if (isset($_GET['aksi']) && $_GET['aksi'] == 'hapus') {
+	$tugas->hapus($_GET['tid']);
+	header('Location: index.php?h=tugas&aid=' . $_GET['aid']);
+	exit();
+}
+
 ?>
 <!-- konten utama -->
 <div class="col-md-12">
@@ -29,11 +36,18 @@ $data_tugas = $tugas->get_by_ajar_id($id_ajar);
 							<td><?php echo ++$i ?></td>
 							<td><?php echo $row['tugas_nama'] ?></td>
 							<td><?php echo $row['tugas_deadline'] ?></td>
-							<td><a href="#" class="btn btn-sm btn-success">Download</a></td>
+							<td>
+								<!-- cek apakah file ada di server -->
+								<?php if ( ! empty($row['tugas_file']) && file_exists('file/' . $row['tugas_file'])): ?>
+									<a href="file/<?php echo $row['tugas_file'] ?>" download class="btn btn-sm btn-success">Download</a>
+								<?php else: ?>
+									File tidak ada
+								<?php endif ?>
+							</td>
 							<td>10/26</td>
 							<td>
 								<a href="index.php?h=ubah-tugas&tid=<?php echo $row['tugas_id'] ?>" class="btn btn-sm btn-warning">Ubah</a>
-								<a href="index.php?h=hapus-tugas&tid=<?php echo $row['tugas_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')">Hapus</a>
+								<a href="index.php?h=tugas&aksi=hapus&aid=<?php echo $_GET['aid'] ?>&tid=<?php echo $row['tugas_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')">Hapus</a>
 							</td>
 						</tr>
 					<?php endforeach ?>
@@ -41,7 +55,7 @@ $data_tugas = $tugas->get_by_ajar_id($id_ajar);
 			</table>
 		</div>
 		<div class="card-footer text-right">
-			<a href="index.php?h=tambah-tugas" class="btn btn-primary">Tambah Tugas</a>
+			<a href="index.php?h=tambah-tugas&aid=<?php echo $_GET['aid'] ?>" class="btn btn-primary">Tambah Tugas</a>
 		</div>
 	</div>
 </div>
