@@ -1,0 +1,7 @@
+/* EDIT LOGIN NAV */
+.bg-secondary.active, 
+.bg-secondary.active:active,
+.bg-secondary.active:focus,
+.bg-secondary.active:hover {
+	background-color: #1d2124 !important;
+}

@@ -20,6 +20,7 @@ if ( ! $login_akses) {
 	<title>Beranda</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="fontawesome/css/all.min.css">
+	<link rel="stylesheet" href="css/custom.css">
 	<script src="js/jquery-3.3.1.slim.min.js"></script>
 </head>
 <body class="bg-secondary">
@@ -63,6 +64,9 @@ if ( ! $login_akses) {
 					break;
 					case 'ubah-tugas':
 						include $login_akses . '/ubah-tugas.php';
+					break;
+					case 'kumpul-tugas':
+						include $login_akses . '/kumpul-tugas.php';
 					break;
 
 					// matakuliah

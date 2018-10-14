@@ -61,6 +61,7 @@ if (isset($_GET['akses'])) {
 	<title>Login</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="fontawesome/css/all.min.css">
+	<link rel="stylesheet" href="css/custom.css">
 </head>
 <body class="h-100 bg-secondary">
 	<div class="container h-100">
@@ -71,10 +72,10 @@ if (isset($_GET['akses'])) {
 					<div class="card-body">
 						<ul class="nav nav-pills nav-fill mb-3" id="myLogin" role="tablist">
 							<li class="nav-item">
-								<a class="nav-link text-light mx-1 active" id="mahasiswa-tab" data-toggle="tab" href="#mahasiswa" role="tab" aria-controls="mahasiswa" aria-selected="true">Mahasiswa</a>
+								<a class="nav-link bg-secondary text-light mx-1 active" id="mahasiswa-tab" data-toggle="tab" href="#mahasiswa" role="tab" aria-controls="mahasiswa" aria-selected="true">Mahasiswa</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link text-light mx-1" id="dosen-tab" data-toggle="tab" href="#dosen" role="tab" aria-controls="dosen" aria-selected="false">Dosen</a>
+								<a class="nav-link bg-secondary text-light mx-1" id="dosen-tab" data-toggle="tab" href="#dosen" role="tab" aria-controls="dosen" aria-selected="false">Dosen</a>
 							</li>
 						</ul>
 						<div class="tab-content" id="myLoginContent">
@@ -92,7 +93,7 @@ if (isset($_GET['akses'])) {
 										<input type="password" name="password" class="form-control" placeholder="******">
 									</div>
 									<div class="form-group text-center mb-1">
-										<button class="btn btn-info"><i class="fas fa-sign-in-alt"></i> LOGIN MAHASISWA</button>
+										<button class="btn btn-info">LOGIN MAHASISWA</button>
 									</div>
 								</form>
 							</div>
@@ -107,7 +108,7 @@ if (isset($_GET['akses'])) {
 										<input type="password" name="password" class="form-control" placeholder="******">
 									</div>
 									<div class="form-group text-center mb-1">
-										<button class="btn btn-info"><i class="fas fa-sign-in-alt"></i> LOGIN DOSEN</button>
+										<button class="btn btn-info">LOGIN DOSEN</button>
 									</div>
 								</form>
 							</div>

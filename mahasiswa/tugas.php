@@ -62,16 +62,12 @@ if (isset($_GET['aksi']) && $_GET['aksi'] == 'hapus') {
 								?>
 							</td>
 							<td>
-								<a href="index.php?h=ubah-tugas&aid=<?php echo $_GET['aid'] ?>&tid=<?php echo $row['tugas_id'] ?>" class="btn btn-sm btn-warning">Ubah</a>
-								<a href="index.php?h=tugas&aksi=hapus&aid=<?php echo $_GET['aid'] ?>&tid=<?php echo $row['tugas_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')">Hapus</a>
+								<a href="index.php?h=kumpul-tugas&aid=<?php echo $_GET['aid'] ?>&tid=<?php echo $row['tugas_id'] ?>" class="btn btn-sm btn-info">Kumpul</a>
 							</td>
 						</tr>
 					<?php endforeach ?>
 				</tbody>
 			</table>
-		</div>
-		<div class="card-footer text-right">
-			<a href="index.php?h=tambah-tugas&aid=<?php echo $_GET['aid'] ?>" class="btn btn-primary">Tambah Tugas</a>
 		</div>
 	</div>
 </div>

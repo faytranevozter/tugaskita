@@ -18,8 +18,11 @@ class Database {
 	}
 }
 
+include_once 'function.php';
 
 include_once 'mahasiswa.class.php';
 include_once 'dosen.class.php';
 include_once 'matakuliah.class.php';
+include_once 'krs.class.php';
 include_once 'tugas.class.php';
+include_once 'kumpul.class.php';

@@ -2,7 +2,8 @@
 $tugas = new Tugas();
 if (isset($_POST["aksi"]) && ($_POST["aksi"] == "tambah")) {
 	$tugas->tambah($_POST['judul'], $_POST['deskripsi'], $_POST['deadline'], $_FILES['file'], $_GET['aid']);
-	header('Location: index.php?h=tugas&aid=' . $_GET['aid']);
+	alert('Data berhasil ditambahkan');
+	redirect('index.php?h=tugas&aid=' . $_GET['aid']);
 	exit();
 }
 ?>
@@ -51,7 +52,7 @@ if (isset($_POST["aksi"]) && ($_POST["aksi"] == "tambah")) {
 <script>
 	$(document).ready(function() {
 		$('#datetimepicker1').datetimepicker({
-			format: "YYYY-MM-DD hh:mm:ss",
+			format: "YYYY-MM-DD HH:mm:ss",
 			icons: {
 				time: 'fas fa-clock',
 				date: 'fas fa-calendar',

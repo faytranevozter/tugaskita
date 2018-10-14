@@ -50,6 +50,36 @@ class Tugas extends Database {
 		}
 	}
 
+	function ubah($id, $judul, $deskripsi, $deadline, $file){
+		// cek jika tugas (dari id_tugas) adadalam database
+		$data = $this->ambil($id);
+		// jika ada
+		if ($data !== FALSE) {
+			// jika mengupload file
+			if ( ! empty($file['name'])) {
+				$nama_file = $file['name'];
+				// memindahkan file ke folder file
+				move_uploaded_file($file['tmp_name'], 'file/' . $nama_file);
+				// hapus file lama jika ada
+				if ( ! empty($data['tugas_file']) && file_exists('file/' . $data['tugas_file'])) {
+					// hapus file lama
+					unlink('file/' . $data['tugas_file']);
+				}
+			} else { // jika tidak upload file
+				// pakai nama yang lama
+				$nama_file = $data['tugas_file'];
+			}
+			$q = $this->con->query("
+				UPDATE tugas SET 
+					tugas_nama = '{$judul}', 
+					tugas_deskripsi = '{$deskripsi}', 
+					tugas_file = '{$nama_file}', 
+					tugas_deadline = '{$deadline}'
+				WHERE tugas_id = '{$id}'
+			");
+		}
+	}
+
 	function hapus($tugas_id){
 		// mengambil data tugas (untuk menghapus file tugas)
 		$data = $this->ambil($tugas_id);
@@ -59,6 +89,22 @@ class Tugas extends Database {
 		}
 		// jalankan query hapus
 		$this->con->query("DELETE FROM tugas WHERE tugas_id = '{$tugas_id}'");
+	}
+
+	function kumpul($tugas_id, $mahasiswa_id, $deskripsi, $file){
+		// jika mengupload file
+		if ( ! empty($file['name'])) {
+			$nama_file = $file['name'];
+			// memindahkan file ke folder file-kumpul
+			move_uploaded_file($file['tmp_name'], 'file-kumpul/' . $nama_file);
+		} else {
+			$nama_file = '';
+		}
+		$tanggal_sekarang = date('Y-m-d H:i:s');
+		$q = $this->con->query("
+			INSERT INTO kumpul(kumpul_tugas_id, kumpul_mahasiswa_id, kumpul_file, kumpul_deskripsi, kumpul_tgl)
+			VALUES('{$tugas_id}', '{$mahasiswa_id}', '{$nama_file}', '{$deskripsi}', '{$tanggal_sekarang}')
+		");
 	}
 
 }
