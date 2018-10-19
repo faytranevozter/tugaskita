@@ -65,6 +65,9 @@ if ( ! $login_akses) {
 					case 'ubah-tugas':
 						include $login_akses . '/ubah-tugas.php';
 					break;
+					case 'lihat-tugas':
+						include $login_akses . '/lihat-tugas.php';
+					break;
 					case 'kumpul-tugas':
 						include $login_akses . '/kumpul-tugas.php';
 					break;

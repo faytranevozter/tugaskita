@@ -62,6 +62,7 @@ if (isset($_GET['aksi']) && $_GET['aksi'] == 'hapus') {
 								?>
 							</td>
 							<td>
+								<a href="index.php?h=lihat-tugas&aid=<?php echo $_GET['aid'] ?>&tid=<?php echo $row['tugas_id'] ?>" class="btn btn-sm btn-success">Lihat</a>
 								<a href="index.php?h=ubah-tugas&aid=<?php echo $_GET['aid'] ?>&tid=<?php echo $row['tugas_id'] ?>" class="btn btn-sm btn-warning">Ubah</a>
 								<a href="index.php?h=tugas&aksi=hapus&aid=<?php echo $_GET['aid'] ?>&tid=<?php echo $row['tugas_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')">Hapus</a>
 							</td>
