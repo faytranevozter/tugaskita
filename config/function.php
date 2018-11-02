@@ -9,3 +9,7 @@ function redirect($url) {
 	// tampilkan alert javascript
 	echo "<script>window.location='{$url}';</script>";
 }
+
+function tanggal($format, $tanggal){
+	return date($format, strtotime($tanggal));
+}

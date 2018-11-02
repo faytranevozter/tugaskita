@@ -26,6 +26,13 @@ $data_kumpul = $kumpul->data_kumpul($id_tugas);
 					<div class="border p-2 mb-2">
 						<?php echo $data_tugas['tugas_deskripsi'] ?>
 					</div>
+
+					<div class="w-100 mb-3"></div>
+
+					<strong>Deadline : <?php echo tanggal('l, d F Y H:i', $data_tugas['tugas_deadline']) ?></strong>
+					
+					<div class="w-100 mb-3"></div>
+
 					<strong>File Tugas : </strong>
 					<!-- cek apakah file ada di server -->
 					<?php if ( ! empty($data_tugas['tugas_file']) && file_exists('file/' . $data_tugas['tugas_file'])): ?>
@@ -44,6 +51,7 @@ $data_kumpul = $kumpul->data_kumpul($id_tugas);
 						<thead>
 							<tr>
 								<th>No.</th>
+								<th>NIM</th>
 								<th>Nama Mahasiswa</th>
 								<th>Tanggal Kumpul</th>
 								<th>File</th>
@@ -53,8 +61,9 @@ $data_kumpul = $kumpul->data_kumpul($id_tugas);
 							<?php foreach ($data_kumpul as $i => $row): ?>
 								<tr>
 									<td><?php echo ++$i ?></td>
+									<td><?php echo $row['mahasiswa_nim'] ?></td>
 									<td><?php echo $row['mahasiswa_nama'] ?></td>
-									<td><?php echo $row['kumpul_tgl'] ?></td>
+									<td><?php echo tanggal('d F Y H:i', $row['kumpul_tgl']) ?></td>
 									<td>
 										<!-- cek apakah file ada di server -->
 										<?php if ( ! empty($row['tugas_file']) && file_exists('file/' . $row['tugas_file'])): ?>

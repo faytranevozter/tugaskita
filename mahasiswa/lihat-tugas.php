@@ -22,6 +22,13 @@ if ( ! $data_tugas) {
 					<div class="border p-2 mb-2">
 						<?php echo $data_tugas['tugas_deskripsi'] ?>
 					</div>
+
+					<div class="w-100 mb-3"></div>
+
+					<strong>Deadline : <?php echo tanggal('l, d F Y H:i', $data_tugas['tugas_deadline']) ?></strong>
+					
+					<div class="w-100 mb-3"></div>
+
 					<strong>File Tugas : </strong>
 					<!-- cek apakah file ada di server -->
 					<?php if ( ! empty($data_tugas['tugas_file']) && file_exists('file/' . $data_tugas['tugas_file'])): ?>

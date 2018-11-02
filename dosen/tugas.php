@@ -28,48 +28,50 @@ if (isset($_GET['aksi']) && $_GET['aksi'] == 'hapus') {
 			Tugas 
 		</div>
 		<div class="card-body">
-			<table class="table table-bordered bg-light text-dark" id="myDatatables">
-				<thead>
-					<tr>
-						<th>No.</th>
-						<th>Nama Tugas / Project</th>
-						<th>Deadline</th>
-						<th>File</th>
-						<th>Status</th>
-						<th>Aksi</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php foreach ($data_tugas as $i => $row): ?>
+			<div class="table-responsive">
+				<table class="table table-bordered bg-light text-dark" id="myDatatables">
+					<thead>
 						<tr>
-							<td><?php echo ++$i ?></td>
-							<td><?php echo $row['tugas_nama'] ?></td>
-							<td><?php echo $row['tugas_deadline'] ?></td>
-							<td>
-								<!-- cek apakah file ada di server -->
-								<?php if ( ! empty($row['tugas_file']) && file_exists('file/' . $row['tugas_file'])): ?>
-									<a href="file/<?php echo $row['tugas_file'] ?>" download class="btn btn-sm btn-success">Download</a>
-								<?php else: ?>
-									File tidak ada
-								<?php endif ?>
-							</td>
-							<td>
-								<?php
-									// menghitung jumlah mahasiswa yang mengumpulkan tugas
-									$jumlah_mengumpulkan = $kumpul->jumlah_mengumpulkan($row['tugas_id']);
-									// tampilkan
-									echo $jumlah_mengumpulkan . ' / ' . $jumlah_mahasiswa;
-								?>
-							</td>
-							<td>
-								<a href="index.php?h=lihat-tugas&aid=<?php echo $_GET['aid'] ?>&tid=<?php echo $row['tugas_id'] ?>" class="btn btn-sm btn-success">Lihat</a>
-								<a href="index.php?h=ubah-tugas&aid=<?php echo $_GET['aid'] ?>&tid=<?php echo $row['tugas_id'] ?>" class="btn btn-sm btn-warning">Ubah</a>
-								<a href="index.php?h=tugas&aksi=hapus&aid=<?php echo $_GET['aid'] ?>&tid=<?php echo $row['tugas_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')">Hapus</a>
-							</td>
+							<th>No.</th>
+							<th>Nama Tugas / Project</th>
+							<th>Deadline</th>
+							<th>File</th>
+							<th>Status</th>
+							<th>Aksi</th>
 						</tr>
-					<?php endforeach ?>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<?php foreach ($data_tugas as $i => $row): ?>
+							<tr>
+								<td><?php echo ++$i ?></td>
+								<td><?php echo $row['tugas_nama'] ?></td>
+								<td><?php echo tanggal('d F Y H:i', $row['tugas_deadline']) ?></td>
+								<td>
+									<!-- cek apakah file ada di server -->
+									<?php if ( ! empty($row['tugas_file']) && file_exists('file/' . $row['tugas_file'])): ?>
+										<a href="file/<?php echo $row['tugas_file'] ?>" download class="btn btn-sm btn-success">Download</a>
+									<?php else: ?>
+										File tidak ada
+									<?php endif ?>
+								</td>
+								<td>
+									<?php
+										// menghitung jumlah mahasiswa yang mengumpulkan tugas
+										$jumlah_mengumpulkan = $kumpul->jumlah_mengumpulkan($row['tugas_id']);
+										// tampilkan
+										echo $jumlah_mengumpulkan . ' / ' . $jumlah_mahasiswa;
+									?>
+								</td>
+								<td>
+									<a href="index.php?h=lihat-tugas&aid=<?php echo $_GET['aid'] ?>&tid=<?php echo $row['tugas_id'] ?>" class="btn btn-sm btn-success">Lihat</a>
+									<a href="index.php?h=ubah-tugas&aid=<?php echo $_GET['aid'] ?>&tid=<?php echo $row['tugas_id'] ?>" class="btn btn-sm btn-warning">Ubah</a>
+									<a href="index.php?h=tugas&aksi=hapus&aid=<?php echo $_GET['aid'] ?>&tid=<?php echo $row['tugas_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')">Hapus</a>
+								</td>
+							</tr>
+						<?php endforeach ?>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<div class="card-footer text-right">
 			<a href="index.php?h=tambah-tugas&aid=<?php echo $_GET['aid'] ?>" class="btn btn-primary">Tambah Tugas</a>

@@ -5,37 +5,39 @@
 			Matakuliah
 		</div>
 		<div class="card-body">
-			<table class="table table-bordered bg-light text-dark" id="myDatatables">
-				<thead>
-					<tr>
-						<th>No.</th>
-						<th>Kode</th>
-						<th>Nama Matakuliah</th>
-						<th>Hari</th>
-						<th>Jam</th>
-						<th>Aksi</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-						$id_dosen = $_SESSION['dosen']['dosen_id'];
-						$makul = new Matakuliah();
-						$data_makul = $makul->get_by_dosen_id($id_dosen);
-					?>
-					<?php foreach ($data_makul as $i => $row): ?>
+			<div class="table-responsive">
+				<table class="table table-bordered bg-light text-dark" id="myDatatables">
+					<thead>
 						<tr>
-							<td><?php echo ++$i ?></td>
-							<td><?php echo $row['matakuliah_kode'] ?></td>
-							<td><?php echo $row['matakuliah_nama'] ?></td>
-							<td><?php echo $row['ajar_hari'] ?></td>
-							<td><?php echo $row['ajar_jam'] ?></td>
-							<td>
-								<a href="index.php?h=tugas&aid=<?php echo $row['ajar_id'] ?>" class="btn btn-sm btn-info">Lihat Tugas</a>
-							</td>
+							<th>No.</th>
+							<th>Kode</th>
+							<th>Nama Matakuliah</th>
+							<th>Hari</th>
+							<th>Jam</th>
+							<th>Aksi</th>
 						</tr>
-					<?php endforeach ?>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<?php
+							$id_dosen = $_SESSION['dosen']['dosen_id'];
+							$makul = new Matakuliah();
+							$data_makul = $makul->get_by_dosen_id($id_dosen);
+						?>
+						<?php foreach ($data_makul as $i => $row): ?>
+							<tr>
+								<td><?php echo ++$i ?></td>
+								<td><?php echo $row['matakuliah_kode'] ?></td>
+								<td><?php echo $row['matakuliah_nama'] ?></td>
+								<td><?php echo $row['ajar_hari'] ?></td>
+								<td><?php echo $row['ajar_jam'] ?></td>
+								<td>
+									<a href="index.php?h=tugas&aid=<?php echo $row['ajar_id'] ?>" class="btn btn-sm btn-info">Lihat Tugas</a>
+								</td>
+							</tr>
+						<?php endforeach ?>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>
