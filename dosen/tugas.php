@@ -42,7 +42,7 @@ if (isset($_GET['aksi']) && $_GET['aksi'] == 'hapus') {
 					</thead>
 					<tbody>
 						<?php foreach ($data_tugas as $i => $row): ?>
-							<tr>
+							<tr class="<?php if(strtotime($row['tugas_deadline']) < time()){ echo 'bg-danger text-light'; } ?>">
 								<td><?php echo ++$i ?></td>
 								<td><?php echo $row['tugas_nama'] ?></td>
 								<td><?php echo tanggal('d F Y H:i', $row['tugas_deadline']) ?></td>

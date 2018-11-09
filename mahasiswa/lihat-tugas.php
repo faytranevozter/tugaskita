@@ -25,7 +25,11 @@ if ( ! $data_tugas) {
 
 					<div class="w-100 mb-3"></div>
 
+					<?php if (strtotime($data_tugas['tugas_deadline']) < time()): ?>
+					<strong>Deadline : <span class="text-danger"><?php echo tanggal('l, d F Y H:i', $data_tugas['tugas_deadline']) ?></span> (<span class="font-italic">sudah melewati</span>)</strong>
+					<?php else: ?>
 					<strong>Deadline : <?php echo tanggal('l, d F Y H:i', $data_tugas['tugas_deadline']) ?></strong>
+					<?php endif ?>
 					
 					<div class="w-100 mb-3"></div>
 

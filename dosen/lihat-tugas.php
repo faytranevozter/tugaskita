@@ -29,7 +29,11 @@ $data_kumpul = $kumpul->data_kumpul($id_tugas);
 
 					<div class="w-100 mb-3"></div>
 
+					<?php if (strtotime($data_tugas['tugas_deadline']) < time()): ?>
+					<strong>Deadline : <span class="text-danger"><?php echo tanggal('l, d F Y H:i', $data_tugas['tugas_deadline']) ?></span> (<span class="font-italic">sudah melewati</span>)</strong>
+					<?php else: ?>
 					<strong>Deadline : <?php echo tanggal('l, d F Y H:i', $data_tugas['tugas_deadline']) ?></strong>
+					<?php endif ?>
 					
 					<div class="w-100 mb-3"></div>
 
@@ -39,6 +43,15 @@ $data_kumpul = $kumpul->data_kumpul($id_tugas);
 						<a href="file/<?php echo $data_tugas['tugas_file'] ?>" download class="btn btn-sm btn-success">Download</a>
 					<?php else: ?>
 						<span class="text-danger">File tidak ada</span>
+					<?php endif ?>
+
+					<!-- beri nilai -->
+					<div class="w-100 mb-3"></div>
+					<strong>Beri Nilai : </strong>
+					<?php if (strtotime($data_tugas['tugas_deadline']) < time()): ?>
+						<a href="#" class="btn btn-sm btn-primary">Beri Nilai</a>
+					<?php else: ?>
+						<span class="font-italic">Belum waktunya</span>
 					<?php endif ?>
 				</div>
 
@@ -59,7 +72,7 @@ $data_kumpul = $kumpul->data_kumpul($id_tugas);
 						</thead>
 						<tbody>
 							<?php foreach ($data_kumpul as $i => $row): ?>
-								<tr>
+								<tr class="<?php if(strtotime($data_tugas['tugas_deadline']) < strtotime($row['kumpul_tgl'])){ echo 'bg-danger text-light'; } ?>">
 									<td><?php echo ++$i ?></td>
 									<td><?php echo $row['mahasiswa_nim'] ?></td>
 									<td><?php echo $row['mahasiswa_nama'] ?></td>
