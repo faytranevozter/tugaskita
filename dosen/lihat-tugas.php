@@ -30,7 +30,7 @@ $data_kumpul = $kumpul->data_kumpul($id_tugas);
 					<div class="w-100 mb-3"></div>
 
 					<?php if (strtotime($data_tugas['tugas_deadline']) < time()): ?>
-					<strong>Deadline : <span class="text-danger"><?php echo tanggal('l, d F Y H:i', $data_tugas['tugas_deadline']) ?></span> (<span class="font-italic">sudah melewati</span>)</strong>
+					<strong>Deadline : <span class="text-danger"><?php echo tanggal('l, d F Y H:i', $data_tugas['tugas_deadline']) ?></span> (<span class="font-italic">sudah melewati deadline</span>)</strong>
 					<?php else: ?>
 					<strong>Deadline : <?php echo tanggal('l, d F Y H:i', $data_tugas['tugas_deadline']) ?></strong>
 					<?php endif ?>
@@ -49,7 +49,7 @@ $data_kumpul = $kumpul->data_kumpul($id_tugas);
 					<div class="w-100 mb-3"></div>
 					<strong>Beri Nilai : </strong>
 					<?php if (strtotime($data_tugas['tugas_deadline']) < time()): ?>
-						<a href="#" class="btn btn-sm btn-primary">Beri Nilai</a>
+						<a href="index.php?h=beri-nilai&aid=<?php echo $_GET['aid'] ?>&tid=<?php echo $_GET['tid'] ?>" class="btn btn-sm btn-primary">Beri Nilai</a>
 					<?php else: ?>
 						<span class="font-italic">Belum waktunya</span>
 					<?php endif ?>

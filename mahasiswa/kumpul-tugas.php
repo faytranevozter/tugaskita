@@ -3,7 +3,7 @@ $tugas = new Tugas();
 if (isset($_POST["aksi"]) && ($_POST["aksi"] == "kumpul")) {
 	$tugas->kumpul($_GET['tid'], $_SESSION['mahasiswa']['mahasiswa_id'], $_POST['deskripsi'], $_FILES['file']);
 	alert('Tugas berhasil dikumpulkan');
-	redirect('index.php?h=tugas&aid=' . $_GET['aid']);
+	redirect('index.php?h=lihat-tugas&aid=' . $_GET['aid'] . '&tid=' . $_GET['tid']);
 	exit();
 }
 ?>

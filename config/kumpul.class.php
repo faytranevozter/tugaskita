@@ -56,4 +56,52 @@ class Kumpul extends Database {
 		}
 	}
 
+	/**
+	 * fungsi untuk mengambil data kumpul berdasarkan id_kumpul/kumpul_id
+	 * @param  $kumpul_id       id_kumpul yang akan dicari
+	 * @return array            data kumpul
+	 */
+	function ambil($kumpul_id) {
+		$q = $this->con->query("
+			SELECT * FROM kumpul k
+			INNER JOIN tugas t ON k.kumpul_tugas_id = t.tugas_id
+			INNER JOIN ajar a ON a.ajar_id = t.tugas_ajar_id
+			INNER JOIN matakuliah m ON a.ajar_matakuliah_id = m.matakuliah_id
+			INNER JOIN dosen d ON a.ajar_dosen_id = d.dosen_id
+			WHERE k.kumpul_id = '{$kumpul_id}'");
+		if ($q->num_rows > 0) {
+			return $q->fetch_array();
+		} else {
+			return FALSE;
+		}
+	}
+
+	function ubah($id, $deskripsi, $file){
+		// cek jika kumpul (dari id_kumpul) adadalam database
+		$data = $this->ambil($id);
+		// jika ada
+		if ($data !== FALSE) {
+			// jika mengupload file
+			if ( ! empty($file['name'])) {
+				$nama_file = $file['name'];
+				// memindahkan file ke folder file
+				move_uploaded_file($file['tmp_name'], 'file-kumpul/' . $nama_file);
+				// hapus file lama jika ada
+				if ( ! empty($data['kumpul_file']) && file_exists('file-kumpul/' . $data['kumpul_file'])) {
+					// hapus file lama
+					unlink('file-kumpul/' . $data['kumpul_file']);
+				}
+			} else { // jika tidak upload file
+				// pakai nama yang lama
+				$nama_file = $data['kumpul_file'];
+			}
+			$q = $this->con->query("
+				UPDATE kumpul SET 
+					kumpul_deskripsi = '{$deskripsi}', 
+					kumpul_file = '{$nama_file}'
+				WHERE kumpul_id = '{$id}'
+			");
+		}
+	}
+
 }

@@ -71,6 +71,14 @@ if ( ! $login_akses) {
 					case 'kumpul-tugas':
 						include $login_akses . '/kumpul-tugas.php';
 					break;
+					case 'ubah-kumpul':
+						if ($login_akses == 'dosen') {
+							alert('Anda tidak punya akses ke halaman tersebut!'); // tampilkan pesan
+							redirect('index.php'); // pindahkan halaman
+							exit(); // hentikan script
+						}
+						include $login_akses . '/ubah-kumpul.php';
+					break;
 
 					// matakuliah
 					case 'matakuliah':

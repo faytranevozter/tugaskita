@@ -64,17 +64,6 @@ if (isset($_GET['aksi']) && $_GET['aksi'] == 'hapus') {
 								</td>
 								<td>
 									<a href="index.php?h=lihat-tugas&aid=<?php echo $_GET['aid'] ?>&tid=<?php echo $row['tugas_id'] ?>" class="btn btn-sm btn-success">Lihat</a>
-									<?php
-										// cek apakah mahasiswa sudah mengumpulkan tugas
-										// jika sudah, tampilkan tombol ubah
-										$id_mahasiswa = $_SESSION['mahasiswa']['mahasiswa_id'];
-										$id_kumpul = $kumpul->cek_kumpul($row['tugas_id'], $id_mahasiswa);
-										if ($id_kumpul !== FALSE) {
-											echo '<a href="index.php?h=ubah-tugas&aid=' . $_GET['aid'] . '&tid=' . $row['tugas_id'] .'&kid=' . $id_kumpul .'" class="btn btn-sm btn-warning">Ubah</a>';
-										} else { // selain itu, tampilkan tombol tambah
-											echo '<a href="index.php?h=kumpul-tugas&aid=' . $_GET['aid'] . '&tid=' . $row['tugas_id'] .'" class="btn btn-sm btn-info">Kumpul</a>';
-										}
-									?>
 								</td>
 							</tr>
 						<?php endforeach ?>

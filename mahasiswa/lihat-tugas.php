@@ -1,6 +1,7 @@
 <?php
 $id_tugas = $_GET['tid']; // mengambil dari url (ex: ?id=23)
 $tugas = new Tugas();
+$kumpul = new Kumpul();
 $data_tugas = $tugas->ambil($id_tugas);
 
 // jika data tugas tidak ditemukan
@@ -26,7 +27,7 @@ if ( ! $data_tugas) {
 					<div class="w-100 mb-3"></div>
 
 					<?php if (strtotime($data_tugas['tugas_deadline']) < time()): ?>
-					<strong>Deadline : <span class="text-danger"><?php echo tanggal('l, d F Y H:i', $data_tugas['tugas_deadline']) ?></span> (<span class="font-italic">sudah melewati</span>)</strong>
+					<strong>Deadline : <span class="text-danger"><?php echo tanggal('l, d F Y H:i', $data_tugas['tugas_deadline']) ?></span> (<span class="font-italic">sudah melewati deadline</span>)</strong>
 					<?php else: ?>
 					<strong>Deadline : <?php echo tanggal('l, d F Y H:i', $data_tugas['tugas_deadline']) ?></strong>
 					<?php endif ?>
@@ -40,6 +41,20 @@ if ( ! $data_tugas) {
 					<?php else: ?>
 						<span class="text-danger">File tidak ada</span>
 					<?php endif ?>
+
+					<div class="w-100 mb-3"></div>
+					<strong>Kumpul : </strong>
+					<?php
+						// cek apakah mahasiswa sudah mengumpulkan tugas
+						// jika sudah, tampilkan tombol ubah
+						$id_mahasiswa = $_SESSION['mahasiswa']['mahasiswa_id'];
+						$id_kumpul = $kumpul->cek_kumpul($data_tugas['tugas_id'], $id_mahasiswa);
+						if ($id_kumpul !== FALSE) {
+							echo '<a href="index.php?h=ubah-kumpul&aid=' . $_GET['aid'] . '&tid=' . $data_tugas['tugas_id'] .'&kid=' . $id_kumpul .'" class="btn btn-sm btn-warning">Ubah Pengumpulan</a>';
+						} else { // selain itu, tampilkan tombol tambah
+							echo '<a href="index.php?h=kumpul-tugas&aid=' . $_GET['aid'] . '&tid=' . $data_tugas['tugas_id'] .'" class="btn btn-sm btn-info">Kumpulkan</a>';
+						}
+					?>
 				</div>
 			</div>
 		</div>
