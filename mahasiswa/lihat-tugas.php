@@ -2,6 +2,7 @@
 $id_tugas = $_GET['tid']; // mengambil dari url (ex: ?id=23)
 $tugas = new Tugas();
 $kumpul = new Kumpul();
+$nilai = new Nilai();
 $data_tugas = $tugas->ambil($id_tugas);
 
 // jika data tugas tidak ditemukan
@@ -55,12 +56,27 @@ if ( ! $data_tugas) {
 						// jika sudah, tampilkan tombol ubah
 						$id_mahasiswa = $_SESSION['mahasiswa']['mahasiswa_id'];
 						$id_kumpul = $kumpul->cek_kumpul($data_tugas['tugas_id'], $id_mahasiswa);
-						if ($id_kumpul !== FALSE) {
-							echo '<a href="index.php?h=ubah-kumpul&aid=' . $_GET['aid'] . '&tid=' . $data_tugas['tugas_id'] .'&kid=' . $id_kumpul .'" class="btn btn-sm btn-warning">Ubah Pengumpulan</a>';
-						} else { // selain itu, tampilkan tombol tambah
-							echo '<a href="index.php?h=kumpul-tugas&aid=' . $_GET['aid'] . '&tid=' . $data_tugas['tugas_id'] .'" class="btn btn-sm btn-info">Kumpulkan</a>';
-						}
 					?>
+					<?php if ($id_kumpul !== FALSE): ?>
+						<a href="index.php?h=ubah-kumpul&aid='<?php echo $_GET['aid'] . '&tid=' . $data_tugas['tugas_id'] .'&kid=' . $id_kumpul; ?>'" class="btn btn-sm btn-warning">Ubah Pengumpulan</a>
+					<?php else: ?>
+						<!-- selain itu, tampilkan tombol tambah -->
+						<a href="index.php?h=kumpul-tugas&aid='<?php echo $_GET['aid'] . '&tid=' . $data_tugas['tugas_id'] ?>" class="btn btn-sm btn-info">Kumpulkan</a>
+					<?php endif ?>
+
+					<div class="w-100 mb-3"></div>
+					<strong>Nilai : </strong>
+					<?php if ($id_kumpul !== FALSE): ?>
+						<?php
+							// cek apakah sudah pernah diberi nilai oleh dosen
+							$nilai_kumpul = $nilai->cek_nilai($id_kumpul);
+						?>
+						<?php if ($nilai_kumpul !== FALSE): ?>
+							<span class="text-dark"><?php echo $nilai_kumpul ?></span>
+						<?php else: ?>
+							<span class="text-dark">Belum ada</span>
+						<?php endif ?>
+					<?php endif ?>
 				</div>
 			</div>
 		</div>
