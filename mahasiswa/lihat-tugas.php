@@ -20,18 +20,24 @@ if ( ! $data_tugas) {
 		<div class="card-body bg-light text-dark">
 			<div class="row justify-content-center">
 				<div class="col-md-8">
-					<div class="border p-2 mb-2">
-						<?php echo $data_tugas['tugas_deskripsi'] ?>
-					</div>
-
+					<strong>Matakuliah : </strong>
+					<span class="text-dark"><?php echo $data_tugas['matakuliah_nama'] ?></span>
 					<div class="w-100 mb-3"></div>
 
+					<strong>Dosen : </strong>
+					<span class="text-dark"><?php echo $data_tugas['dosen_nama'] ?></span>
+					<div class="w-100 mb-3"></div>
+
+					<strong>Deskripsi : </strong>
+					<div class="border p-2 mb-2"><?php echo $data_tugas['tugas_deskripsi'] ?></div>
+					<div class="w-100 mb-3"></div>
+
+					<strong>Deadline : </strong>
 					<?php if (strtotime($data_tugas['tugas_deadline']) < time()): ?>
-					<strong>Deadline : <span class="text-danger"><?php echo tanggal('l, d F Y H:i', $data_tugas['tugas_deadline']) ?></span> (<span class="font-italic">sudah melewati deadline</span>)</strong>
+						<span class="text-danger"><?php echo tanggal('l, d F Y H:i', $data_tugas['tugas_deadline']) ?></span> (<span class="font-italic">sudah melewati deadline</span>)
 					<?php else: ?>
-					<strong>Deadline : <?php echo tanggal('l, d F Y H:i', $data_tugas['tugas_deadline']) ?></strong>
+						<span class="text-dark"><?php echo tanggal('l, d F Y H:i', $data_tugas['tugas_deadline']) ?></span>
 					<?php endif ?>
-					
 					<div class="w-100 mb-3"></div>
 
 					<strong>File Tugas : </strong>

@@ -26,3 +26,4 @@ include_once 'matakuliah.class.php';
 include_once 'krs.class.php';
 include_once 'tugas.class.php';
 include_once 'kumpul.class.php';
+include_once 'nilai.class.php';

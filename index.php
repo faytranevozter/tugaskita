@@ -79,6 +79,14 @@ if ( ! $login_akses) {
 						}
 						include $login_akses . '/ubah-kumpul.php';
 					break;
+					case 'beri-nilai':
+						if ($login_akses == 'mahasiswa') {
+							alert('Anda tidak punya akses ke halaman tersebut!'); // tampilkan pesan
+							redirect('index.php'); // pindahkan halaman
+							exit(); // hentikan script
+						}
+						include $login_akses . '/beri-nilai.php';
+					break;
 
 					// matakuliah
 					case 'matakuliah':
