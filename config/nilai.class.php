@@ -19,6 +19,8 @@ class Nilai extends Database {
 		}
 	}
 
+	// fungsi untuk memberi nilai pada tugas yang telah dikumpulkan oleh mahasiswa
+	// param nilai dalam bentuk array per mahasiswa yang sudah mengumpulkan
 	function beri_nilai($array_nilai=[]) {
 		$tanggal_sekarang = date('Y-m-d H:i:s');
 		foreach ($array_nilai as $kumpul_id => $nilai) {
