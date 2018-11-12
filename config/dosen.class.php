@@ -2,6 +2,7 @@
 
 class Dosen extends Database {
 
+	// fungsi untuk melakukan login untuk dosen, dengan parameter nip dan password
 	function login($nip, $password) {
 		// prevent sql injection
 		$nip = $this->con->real_escape_string($nip);

@@ -2,6 +2,7 @@
 
 class Tugas extends Database {
 
+	// fungsi mendapatkan data tugas berdasarkan id ajar / ajar_id
 	function get_by_ajar_id($ajar_id) {
 		$q = $this->con->query("
 			SELECT * FROM tugas t
@@ -20,6 +21,8 @@ class Tugas extends Database {
 		}
 	}
 
+	// fungsi untuk menambahkan tugas
+	// param judul, deskripsi, deadline, file, ajar_id
 	function tambah($judul, $deskripsi, $deadline, $file, $ajar_id){
 		// jika mengupload file
 		if ( ! empty($file['name'])) {
@@ -36,6 +39,7 @@ class Tugas extends Database {
 		");
 	}
 
+	// fungsi untuk mengambil data tugas berdasarkan tugas_id
 	function ambil($tugas_id){
 		$q = $this->con->query("
 			SELECT * FROM tugas t
@@ -50,6 +54,8 @@ class Tugas extends Database {
 		}
 	}
 
+	// fungsi untuk mengubah data tugas yang sebelumnya sudah dibuat
+	// param id, judul, deskripsi, deadline, file
 	function ubah($id, $judul, $deskripsi, $deadline, $file){
 		// cek jika tugas (dari id_tugas) adadalam database
 		$data = $this->ambil($id);
@@ -80,6 +86,7 @@ class Tugas extends Database {
 		}
 	}
 
+	// fungsi untuk menghapus file tugas berdasarkan tugas_id
 	function hapus($tugas_id){
 		// mengambil data tugas (untuk menghapus file tugas)
 		$data = $this->ambil($tugas_id);
@@ -91,6 +98,8 @@ class Tugas extends Database {
 		$this->con->query("DELETE FROM tugas WHERE tugas_id = '{$tugas_id}'");
 	}
 
+	// fungsi untuk mengumpulkan tugas yang sudah dibuat oleh dosen
+	// param tugas_id, mahasiswa_id, deskripsi, file
 	function kumpul($tugas_id, $mahasiswa_id, $deskripsi, $file){
 		// jika mengupload file
 		if ( ! empty($file['name'])) {

@@ -76,6 +76,8 @@ class Kumpul extends Database {
 		}
 	}
 
+	// fungsi untuk mengubah data yang sebelumnya telah dikumpulkan 
+	// param id, deskripsi, dan file
 	function ubah($id, $deskripsi, $file){
 		// cek jika kumpul (dari id_kumpul) adadalam database
 		$data = $this->ambil($id);

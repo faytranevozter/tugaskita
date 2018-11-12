@@ -2,6 +2,7 @@
 
 class Matakuliah extends Database {
 
+	// fungsi untuk mengambil data matakuliah berdasarkan dosen_id dengan parameter dosen_id
 	function get_by_dosen_id($dosen_id) {
 		$q = $this->con->query("
 			SELECT * FROM ajar a
@@ -20,6 +21,7 @@ class Matakuliah extends Database {
 		}
 	}
 
+	// fungsi untuk mengambil data matakuliah berdasarkan mahasiswa_id dengan parameter mahasiswa_id
 	function get_by_mahasiswa_id($mahasiswa_id) {
 		$q = $this->con->query("
 			SELECT * FROM krs k
