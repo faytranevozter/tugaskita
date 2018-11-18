@@ -16,4 +16,21 @@ class Mahasiswa extends Database {
 		}
 	}
 
+	// fungsi untuk mendapatkan data mahasiswa berdasarkan ajar_id
+	function get_by_ajar_id($ajar_id) {
+		$q = $this->con->query("
+			SELECT * FROM krs k
+			INNER JOIN mahasiswa m ON k.krs_mahasiswa_id = m.mahasiswa_id
+			WHERE k.krs_ajar_id = '{$ajar_id}'");
+		if ($q->num_rows > 0) {
+			$data = []; // definisi data awal (kosong)
+			while ($row = $q->fetch_array()) {
+				$data[] = $row; // masukkan data dari tabel kedalam var. data
+			}
+			return $data; // kembalikan data (yang sudah diisi)
+		} else { // jika data dalam tabel masih kosong
+			return []; // kembalikan data kosong
+		}
+	}
+
 }

@@ -39,4 +39,20 @@ class Nilai extends Database {
 		}
 	}
 
+	// fungsi untuk melihat nilai berdasarkan tugas_id dan mahasiswa_id
+	function lihat_nilai($tugas_id, $mahasiswa_id) {
+		$q = $this->con->query("
+			SELECT nilai_value FROM nilai n
+			JOIN kumpul k ON k.kumpul_id = n.nilai_kumpul_id
+			WHERE k.kumpul_tugas_id = '{$tugas_id}'
+			AND k.kumpul_mahasiswa_id = '{$mahasiswa_id}'
+			");
+		if ($q->num_rows > 0) {
+			$data = $q->fetch_assoc();
+			return $data['nilai_value'];
+		} else {
+			return FALSE;
+		}
+	}
+
 }

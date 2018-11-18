@@ -30,10 +30,10 @@ if ( ! $login_akses) {
 				<a class="nav-link rounded-0 bg-info text-light active" href="index.php?h=beranda"><i class="fas fa-columns"></i> Beranda</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link rounded-0 bg-dark text-light" href="index.php?h=matakuliah"><i class="fas fa-book"></i> Matakuliah</a>
+				<a class="nav-link rounded-0 bg-dark text-light" href="index.php?h=matakuliah"><i class="fas fa-book"></i> Tugas</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link rounded-0 bg-dark text-light" href="#"><i class="fas fa-clipboard-list"></i> Nilai</a>
+				<a class="nav-link rounded-0 bg-dark text-light" href="index.php?h=nilai-matakuliah"><i class="fas fa-clipboard-list"></i> Nilai</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link rounded-0 bg-dark text-light" href="#"><i class="fas fa-user"></i> Profile</a>
@@ -91,6 +91,16 @@ if ( ! $login_akses) {
 					// matakuliah
 					case 'matakuliah':
 						include $login_akses . '/matakuliah.php';
+					break;
+
+					// nilai matakuliah
+					case 'nilai-matakuliah':
+						include $login_akses . '/nilai-matakuliah.php';
+					break;
+
+					// nilai
+					case 'nilai':
+						include $login_akses . '/nilai.php';
 					break;
 
 					// logout

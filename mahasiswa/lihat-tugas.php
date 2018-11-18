@@ -58,10 +58,10 @@ if ( ! $data_tugas) {
 						$id_kumpul = $kumpul->cek_kumpul($data_tugas['tugas_id'], $id_mahasiswa);
 					?>
 					<?php if ($id_kumpul !== FALSE): ?>
-						<a href="index.php?h=ubah-kumpul&aid='<?php echo $_GET['aid'] . '&tid=' . $data_tugas['tugas_id'] .'&kid=' . $id_kumpul; ?>'" class="btn btn-sm btn-warning">Ubah Pengumpulan</a>
+						<a href="index.php?h=ubah-kumpul&aid=<?php echo $_GET['aid'] . '&tid=' . $data_tugas['tugas_id'] .'&kid=' . $id_kumpul; ?>" class="btn btn-sm btn-warning">Ubah Pengumpulan</a>
 					<?php else: ?>
 						<!-- selain itu, tampilkan tombol tambah -->
-						<a href="index.php?h=kumpul-tugas&aid='<?php echo $_GET['aid'] . '&tid=' . $data_tugas['tugas_id'] ?>" class="btn btn-sm btn-info">Kumpulkan</a>
+						<a href="index.php?h=kumpul-tugas&aid=<?php echo $_GET['aid'] . '&tid=' . $data_tugas['tugas_id'] ?>" class="btn btn-sm btn-info">Kumpulkan</a>
 					<?php endif ?>
 
 					<div class="w-100 mb-3"></div>
@@ -73,6 +73,7 @@ if ( ! $data_tugas) {
 						?>
 						<?php if ($nilai_kumpul !== FALSE): ?>
 							<span class="text-dark"><?php echo $nilai_kumpul ?></span>
+							(<a href="index.php?h=nilai&aid=<?php echo $_GET['aid'] ?>" class="">Lihat Semua</a>)
 						<?php else: ?>
 							<span class="text-dark">Belum ada</span>
 						<?php endif ?>
