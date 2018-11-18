@@ -83,3 +83,12 @@ function build_calendar($month, $year, $hightlight=[], $dateArray) {
 	$calendar .= "</table>";
 	return $calendar;
 }
+
+function active_on($links=[]){
+	$current_url = isset($_GET['h']) ? $_GET['h'] : 'beranda';
+	if (in_array($current_url, $links)) {
+		return "bg-info active";
+	} else {
+		return "bg-dark";
+	}
+}

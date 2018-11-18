@@ -10,9 +10,9 @@
 								<td class="align-top text-center">
 									<p class="align-middle">
 										<?php if ($_SESSION['dosen']['dosen_jenis_kelamin'] == 'Laki-laki'): ?>
-										<img src="img/default_men.png" alt="Foto" class="card-img-top">
+										<img src="img/default_men.png" alt="Foto" class="card-img-top" style="max-width: 200px">
 										<?php else: ?>
-										<img src="img/default_woman.png" alt="Foto" class="card-img-top">
+										<img src="img/default_woman.png" alt="Foto" class="card-img-top" style="max-width: 200px">
 										<?php endif ?>
 									</p>
 									<p class="align-middle">NIP : <?php echo $_SESSION['dosen']['dosen_nip'] ?></p>
@@ -29,4 +29,4 @@
 <style>
 #table-profile {border: 0; }
 #table-profile tr td {border: 0; }
-</style>``
+</style>
