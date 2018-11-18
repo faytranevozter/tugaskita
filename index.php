@@ -36,7 +36,7 @@ if ( ! $login_akses) {
 				<a class="nav-link rounded-0 bg-dark text-light" href="index.php?h=nilai-matakuliah"><i class="fas fa-clipboard-list"></i> Nilai</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link rounded-0 bg-dark text-light" href="#"><i class="fas fa-user"></i> Profile</a>
+				<a class="nav-link rounded-0 bg-dark text-light" href="index.php?h=profile"><i class="fas fa-user"></i> Profile</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link rounded-0 bg-dark text-light" href="index.php?h=logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
@@ -101,6 +101,11 @@ if ( ! $login_akses) {
 					// nilai
 					case 'nilai':
 						include $login_akses . '/nilai.php';
+					break;
+
+					// profile
+					case 'profile':
+						include $login_akses . '/profile.php';
 					break;
 
 					// logout
