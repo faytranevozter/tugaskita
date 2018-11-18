@@ -3,6 +3,7 @@ CREATE TABLE `dosen` (
 	`dosen_nip` VARCHAR(15) NOT NULL , 
 	`dosen_nama` VARCHAR(50) NOT NULL , 
 	`dosen_password` VARCHAR(50) NOT NULL , 
+	`dosen_jenis_kelamin` ENUM('Laki-laki','Perempuan') NOT NULL , 
 	`dosen_foto` VARCHAR(50) NOT NULL , 
 	PRIMARY KEY (`dosen_id`)
 );
