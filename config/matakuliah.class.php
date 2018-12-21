@@ -4,6 +4,7 @@ class Matakuliah extends Database {
 
 	// fungsi untuk mengambil data matakuliah berdasarkan dosen_id dengan parameter dosen_id
 	function get_by_dosen_id($dosen_id) {
+		$dosen_id = $this->con->real_escape_string($dosen_id);
 		$q = $this->con->query("
 			SELECT * FROM ajar a
 			INNER JOIN matakuliah m ON a.ajar_matakuliah_id = m.matakuliah_id
@@ -23,6 +24,7 @@ class Matakuliah extends Database {
 
 	// fungsi untuk mengambil data matakuliah berdasarkan mahasiswa_id dengan parameter mahasiswa_id
 	function get_by_mahasiswa_id($mahasiswa_id) {
+		$mahasiswa_id = $this->con->real_escape_string($mahasiswa_id);
 		$q = $this->con->query("
 			SELECT * FROM krs k
 			INNER JOIN mahasiswa mhs ON k.krs_mahasiswa_id = mhs.mahasiswa_id

@@ -11,9 +11,14 @@ if ( ! $data_kumpul) {
 }
 
 if (isset($_POST["aksi"]) && ($_POST["aksi"] == "ubah")) {
-	$kumpul->ubah($id_kumpul, $_POST['deskripsi'], $_FILES['file']);
-	alert('Data berhasil diubah');
-	redirect('index.php?h=lihat-tugas&aid=' . $_GET['aid'] . '&tid=' . $_GET['tid']); // pindahkan halaman
+	$exec = $kumpul->ubah($id_kumpul, $_POST['deskripsi'], $_FILES['file']);
+	if ($exec) {
+		alert('Data berhasil diubah');
+		redirect('index.php?h=lihat-tugas&aid=' . $_GET['aid'] . '&tid=' . $_GET['tid']); // pindahkan halaman
+	} else {
+		alert('Data Gagal diubah');
+		redirect('index.php?h=ubah-kumpul&aid=' . $_GET['aid'] . '&tid=' . $_GET['tid'] . '&kid=' . $_GET['kid']); // tetap dihalaman
+	}
 	exit();
 }
 ?><!-- konten utama -->

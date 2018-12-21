@@ -92,3 +92,13 @@ function active_on($links=[]){
 		return "bg-dark";
 	}
 }
+
+function is_allowed_type($filename) {
+	$allowed = ['doc', 'docx', 'pdf', 'ppt', 'pptx', 'xls', 'xlsx', 'xlsx'];
+	$ext = pathinfo($filename, PATHINFO_EXTENSION);
+	if (in_array($ext, $allowed)) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}

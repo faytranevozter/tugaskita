@@ -8,6 +8,7 @@ class Nilai extends Database {
 	 * @return boolean          FALSE jika belum mengumpulkan, Nilai jika sudah
 	 */
 	function cek_nilai($kumpul_id) {
+		$kumpul_id = $this->con->real_escape_string($kumpul_id);
 		$q = $this->con->query("
 			SELECT nilai_value FROM nilai
 			WHERE nilai_kumpul_id = '{$kumpul_id}'");
@@ -41,6 +42,8 @@ class Nilai extends Database {
 
 	// fungsi untuk melihat nilai berdasarkan tugas_id dan mahasiswa_id
 	function lihat_nilai($tugas_id, $mahasiswa_id) {
+		$tugas_id = $this->con->real_escape_string($tugas_id);
+		$mahasiswa_id = $this->con->real_escape_string($mahasiswa_id);
 		$q = $this->con->query("
 			SELECT nilai_value FROM nilai n
 			JOIN kumpul k ON k.kumpul_id = n.nilai_kumpul_id

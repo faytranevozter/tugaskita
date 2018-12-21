@@ -11,9 +11,14 @@ if ( ! $data_tugas) {
 }
 
 if (isset($_POST["aksi"]) && ($_POST["aksi"] == "ubah")) {
-	$tugas->ubah($_GET['tid'], $_POST['judul'], $_POST['deskripsi'], $_POST['deadline'], $_FILES['file']);
-	alert('Data berhasil diubah');
-	redirect('index.php?h=tugas&aid=' . $_GET['aid']);
+	$exec = $tugas->ubah($_GET['tid'], $_POST['judul'], $_POST['deskripsi'], $_POST['deadline'], $_FILES['file']);
+	if ($exec) {
+		alert('Data berhasil diubah');
+		redirect('index.php?h=tugas&aid=' . $_GET['aid']);
+	} else {
+		alert('Data Gagal diubah');
+		redirect('index.php?h=tugas&aid=' . $_GET['aid'] . '&tid=' . $_GET['tid']);
+	}
 	exit();
 }
 ?><!-- konten utama -->

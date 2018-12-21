@@ -1,9 +1,14 @@
 <?php
 $tugas = new Tugas();
 if (isset($_POST["aksi"]) && ($_POST["aksi"] == "tambah")) {
-	$tugas->tambah($_POST['judul'], $_POST['deskripsi'], $_POST['deadline'], $_FILES['file'], $_GET['aid']);
-	alert('Data berhasil ditambahkan');
-	redirect('index.php?h=tugas&aid=' . $_GET['aid']);
+	$exec = $tugas->tambah($_POST['judul'], $_POST['deskripsi'], $_POST['deadline'], $_FILES['file'], $_GET['aid']);
+	if ($exec) {
+		alert('Data berhasil ditambahkan');
+		redirect('index.php?h=tugas&aid=' . $_GET['aid']);
+	} else {
+		alert('Data Gagal ditambahkan');
+		redirect('index.php?h=tambah-tugas&aid=' . $_GET['aid']);
+	}
 	exit();
 }
 ?>

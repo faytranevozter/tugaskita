@@ -18,6 +18,7 @@ class Mahasiswa extends Database {
 
 	// fungsi untuk mendapatkan data mahasiswa berdasarkan ajar_id
 	function get_by_ajar_id($ajar_id) {
+		$ajar_id = $this->con->real_escape_string($ajar_id);
 		$q = $this->con->query("
 			SELECT * FROM krs k
 			INNER JOIN mahasiswa m ON k.krs_mahasiswa_id = m.mahasiswa_id

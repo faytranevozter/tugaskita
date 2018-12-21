@@ -1,9 +1,14 @@
 <?php
 $tugas = new Tugas();
 if (isset($_POST["aksi"]) && ($_POST["aksi"] == "kumpul")) {
-	$tugas->kumpul($_GET['tid'], $_SESSION['mahasiswa']['mahasiswa_id'], $_POST['deskripsi'], $_FILES['file']);
-	alert('Tugas berhasil dikumpulkan');
-	redirect('index.php?h=lihat-tugas&aid=' . $_GET['aid'] . '&tid=' . $_GET['tid']);
+	$exec = $tugas->kumpul($_GET['tid'], $_SESSION['mahasiswa']['mahasiswa_id'], $_POST['deskripsi'], $_FILES['file']);
+	if ($exec) {
+		alert('Tugas berhasil dikumpulkan');
+		redirect('index.php?h=lihat-tugas&aid=' . $_GET['aid'] . '&tid=' . $_GET['tid']);
+	} else {
+		alert('Tugas Gagal dikumpulkan');
+		redirect('index.php?h=kumpul-tugas&aid=' . $_GET['aid'] . '&tid=' . $_GET['tid']);
+	}
 	exit();
 }
 ?>

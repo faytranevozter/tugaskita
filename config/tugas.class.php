@@ -4,6 +4,7 @@ class Tugas extends Database {
 
 	// fungsi mendapatkan data tugas berdasarkan id ajar / ajar_id
 	function get_by_ajar_id($ajar_id) {
+		$ajar_id = $this->con->real_escape_string($ajar_id);
 		$q = $this->con->query("
 			SELECT * FROM tugas t
 			INNER JOIN ajar a ON a.ajar_id = t.tugas_ajar_id
@@ -24,9 +25,16 @@ class Tugas extends Database {
 	// fungsi untuk menambahkan tugas
 	// param judul, deskripsi, deadline, file, ajar_id
 	function tambah($judul, $deskripsi, $deadline, $file, $ajar_id){
+		$judul = $this->con->real_escape_string($judul);
+		$deskripsi = $this->con->real_escape_string($deskripsi);
+		$deadline = $this->con->real_escape_string($deadline);
+		$ajar_id = $this->con->real_escape_string($ajar_id);
 		// jika mengupload file
 		if ( ! empty($file['name'])) {
 			$nama_file = $file['name'];
+			if ( ! is_allowed_type($file['name'])) {
+				return FALSE;
+			}
 			// memindahkan file ke folder file
 			move_uploaded_file($file['tmp_name'], 'file/' . $nama_file);
 		} else {
@@ -37,10 +45,12 @@ class Tugas extends Database {
 			INSERT INTO tugas(tugas_ajar_id, tugas_nama, tugas_deskripsi, tugas_file, tugas_deadline, tugas_tgl_dibuat)
 			VALUES('{$ajar_id}', '{$judul}', '{$deskripsi}', '{$nama_file}', '{$deadline}', '{$tanggal_sekarang}')
 		");
+		return TRUE;
 	}
 
 	// fungsi untuk mengambil data tugas berdasarkan tugas_id
 	function ambil($tugas_id){
+		$tugas_id = $this->con->real_escape_string($tugas_id);
 		$q = $this->con->query("
 			SELECT * FROM tugas t
 			INNER JOIN ajar a ON a.ajar_id = t.tugas_ajar_id
@@ -57,6 +67,10 @@ class Tugas extends Database {
 	// fungsi untuk mengubah data tugas yang sebelumnya sudah dibuat
 	// param id, judul, deskripsi, deadline, file
 	function ubah($id, $judul, $deskripsi, $deadline, $file){
+		$id = $this->con->real_escape_string($id);
+		$judul = $this->con->real_escape_string($judul);
+		$deskripsi = $this->con->real_escape_string($deskripsi);
+		$deadline = $this->con->real_escape_string($deadline);
 		// cek jika tugas (dari id_tugas) adadalam database
 		$data = $this->ambil($id);
 		// jika ada
@@ -64,6 +78,9 @@ class Tugas extends Database {
 			// jika mengupload file
 			if ( ! empty($file['name'])) {
 				$nama_file = $file['name'];
+				if ( ! is_allowed_type($file['name'])) {
+					return FALSE;
+				}
 				// memindahkan file ke folder file
 				move_uploaded_file($file['tmp_name'], 'file/' . $nama_file);
 				// hapus file lama jika ada
@@ -84,15 +101,17 @@ class Tugas extends Database {
 				WHERE tugas_id = '{$id}'
 			");
 		}
+		return TRUE;
 	}
 
 	// fungsi untuk menghapus file tugas berdasarkan tugas_id
 	function hapus($tugas_id){
+		$tugas_id = $this->con->real_escape_string($tugas_id);
 		// mengambil data tugas (untuk menghapus file tugas)
 		$data = $this->ambil($tugas_id);
 		// jika file ada di server, maka hapuskan
 		if ( ! empty($data['tugas_file']) && file_exists('file/' . $data['tugas_file'])) {
-			unlink('file/' . $data['tugas_file']); // hapus file yang ada di folder "file"
+			@unlink('file/' . $data['tugas_file']); // hapus file yang ada di folder "file"
 		}
 		// jalankan query hapus
 		$this->con->query("DELETE FROM tugas WHERE tugas_id = '{$tugas_id}'");
@@ -101,9 +120,15 @@ class Tugas extends Database {
 	// fungsi untuk mengumpulkan tugas yang sudah dibuat oleh dosen
 	// param tugas_id, mahasiswa_id, deskripsi, file
 	function kumpul($tugas_id, $mahasiswa_id, $deskripsi, $file){
+		$tugas_id = $this->con->real_escape_string($tugas_id);
+		$mahasiswa_id = $this->con->real_escape_string($mahasiswa_id);
+		$deskripsi = $this->con->real_escape_string($deskripsi);
 		// jika mengupload file
 		if ( ! empty($file['name'])) {
 			$nama_file = $file['name'];
+			if ( ! is_allowed_type($file['name'])) {
+				return FALSE;
+			}
 			// memindahkan file ke folder file-kumpul
 			move_uploaded_file($file['tmp_name'], 'file-kumpul/' . $nama_file);
 		} else {
@@ -114,9 +139,12 @@ class Tugas extends Database {
 			INSERT INTO kumpul(kumpul_tugas_id, kumpul_mahasiswa_id, kumpul_file, kumpul_deskripsi, kumpul_tgl)
 			VALUES('{$tugas_id}', '{$mahasiswa_id}', '{$nama_file}', '{$deskripsi}', '{$tanggal_sekarang}')
 		");
+		return TRUE;
 	}
 
 	function get_by_dosen_id($dosen_id, $month) {
+		$dosen_id = $this->con->real_escape_string($dosen_id);
+		$month = $this->con->real_escape_string($month);
 		$q = $this->con->query("
 			SELECT * FROM tugas t
 			INNER JOIN ajar a ON a.ajar_id = t.tugas_ajar_id
@@ -135,6 +163,8 @@ class Tugas extends Database {
 	}
 
 	function get_by_mahasiswa_id($mahasiswa_id, $month) {
+		$mahasiswa_id = $this->con->real_escape_string($mahasiswa_id);
+		$month = $this->con->real_escape_string($month);
 		$q = $this->con->query("
 			SELECT * FROM tugas t
 			INNER JOIN ajar a ON a.ajar_id = t.tugas_ajar_id

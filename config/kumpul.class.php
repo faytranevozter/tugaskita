@@ -8,6 +8,7 @@ class Kumpul extends Database {
 	 * @return int              Jumlah yang mengumpulkan
 	 */
 	function jumlah_mengumpulkan($tugas_id) {
+		$tugas_id = $this->con->real_escape_string($tugas_id);
 		$q = $this->con->query("
 			SELECT COUNT(*) AS jumlah FROM kumpul
 			WHERE kumpul_tugas_id = '{$tugas_id}'");
@@ -22,6 +23,8 @@ class Kumpul extends Database {
 	 * @return boolean          FALSE jika belum mengumpulkan, ID kumpul jika sudah mengumpulkan
 	 */
 	function cek_kumpul($tugas_id, $mhs_id) {
+		$tugas_id = $this->con->real_escape_string($tugas_id);
+		$mhs_id = $this->con->real_escape_string($mhs_id);
 		$q = $this->con->query("
 			SELECT kumpul_id FROM kumpul
 			WHERE kumpul_tugas_id = '{$tugas_id}'
@@ -40,6 +43,7 @@ class Kumpul extends Database {
 	 * @return array            Data yang mengumpulkan
 	 */
 	function data_kumpul($tugas_id) {
+		$tugas_id = $this->con->real_escape_string($tugas_id);
 		$q = $this->con->query("
 			SELECT * FROM kumpul k
 			INNER JOIN mahasiswa m ON k.kumpul_mahasiswa_id = m.mahasiswa_id
@@ -62,6 +66,7 @@ class Kumpul extends Database {
 	 * @return array            data kumpul
 	 */
 	function ambil($kumpul_id) {
+		$kumpul_id = $this->con->real_escape_string($kumpul_id);
 		$q = $this->con->query("
 			SELECT * FROM kumpul k
 			INNER JOIN tugas t ON k.kumpul_tugas_id = t.tugas_id
@@ -79,6 +84,8 @@ class Kumpul extends Database {
 	// fungsi untuk mengubah data yang sebelumnya telah dikumpulkan 
 	// param id, deskripsi, dan file
 	function ubah($id, $deskripsi, $file){
+		$id = $this->con->real_escape_string($id);
+		$deskripsi = $this->con->real_escape_string($deskripsi);
 		// cek jika kumpul (dari id_kumpul) adadalam database
 		$data = $this->ambil($id);
 		// jika ada
@@ -86,6 +93,9 @@ class Kumpul extends Database {
 			// jika mengupload file
 			if ( ! empty($file['name'])) {
 				$nama_file = $file['name'];
+				if ( ! is_allowed_type($file['name'])) {
+					return FALSE;
+				}
 				// memindahkan file ke folder file
 				move_uploaded_file($file['tmp_name'], 'file-kumpul/' . $nama_file);
 				// hapus file lama jika ada
@@ -104,6 +114,7 @@ class Kumpul extends Database {
 				WHERE kumpul_id = '{$id}'
 			");
 		}
+		return TRUE;
 	}
 
 }
